@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="frame_id" default="imu_link"/>
+
+	<node pkg="wit_imu_ros" type="wit_imu_ros_node" name="wit_imu_ros_node" output="screen" >
+	  <param name="frame_id" value="$(arg frame_id)"/>
+      <rosparam command="load" file="$(find wit_imu_ros)/params/wit901.yaml" />
+	</node>	
+	
+</launch>
