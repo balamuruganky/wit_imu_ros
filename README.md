@@ -18,10 +18,12 @@ ROS package for WIT inclinometer devices
 There are 3 options to launch the package.
 1) Launch without IMU madgwick filter, magnetic data fusion and IMU transformer
   - roslaunch wit_imu_ros wit901_imu.launch
+  
 2) Launch with IMU madgwick filter, magnetic data fusion and IMU transformer
   - roslaunch wit_imu_ros wit901_filter.launch
   
   Please note ros-melodic-imu-filter-madgwick, ros-melodic-imu-transformer packages to be installed.
+
 3) Launch with IMU madgwick filter, magnetic data fusion and IMU transformer and visualize through Rviz
   - roslaunch wit_imu_ros wit901_imu_test.launch
   
