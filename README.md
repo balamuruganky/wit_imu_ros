@@ -1,6 +1,6 @@
 # wit_imu_ros
 
-ROS package for WIT inclinometer devices
+ROS package for WIT inclinometer devices (http://www.wit-motion.com/english.php?m=text&a=index&classify_id=46396)
 
 ## Supported devices
 - WIT901B
