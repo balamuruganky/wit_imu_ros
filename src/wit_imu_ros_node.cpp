@@ -97,6 +97,10 @@ int main(int argc, char *argv[]) {
     if(nh_private.getParam("magnetic_covariance",rpc_temp)) {
         magnetic_covariance = setCovariance(rpc_temp);
     }
+    pubIMU = nh.advertise<sensor_msgs::Imu>(imu_topic, 1000);
+    pubTemp = nh.advertise<sensor_msgs::Temperature>(temperature_topic, 1000);
+    pubMag = nh.advertise<sensor_msgs::MagneticField>(mag_topic, 1000);
+    pubPres = nh.advertise<sensor_msgs::FluidPressure>(pressure_topic, 1000);
 
     CJY901 imu = CJY901();
     try {
@@ -186,12 +190,10 @@ int main(int argc, char *argv[]) {
             //
             // Publish imu topic
             //
-            pubIMU = nh.advertise<sensor_msgs::Imu>(imu_topic, 1000);
             pubIMU.publish(imu_data);
             //
             // Publish temperature topic
             //
-            pubTemp = nh.advertise<sensor_msgs::Temperature>(temperature_topic, 1000);
             sensor_msgs::Temperature msgTemp;
             msgTemp.header.stamp = imu_data.header.stamp;
             msgTemp.header.frame_id = imu_data.header.frame_id;
@@ -199,7 +201,6 @@ int main(int argc, char *argv[]) {
             pubTemp.publish(msgTemp);
             // Magnatometer
             if (imu.isMagDataAvailable()) {
-                pubMag = nh.advertise<sensor_msgs::MagneticField>(mag_topic, 1000);
                 sensor_msgs::MagneticField mag_data;
                 mag_data.header.stamp = imu_data.header.stamp;
                 mag_data.header.frame_id = imu_data.header.frame_id;
@@ -211,7 +212,6 @@ int main(int argc, char *argv[]) {
             }
             // Barometer
             if (imu.isPressureDataAvailable()) {
-                pubPres = nh.advertise<sensor_msgs::FluidPressure>(pressure_topic, 1000);
                 sensor_msgs::FluidPressure msgPres;
                 msgPres.header.stamp = imu_data.header.stamp;
                 msgPres.header.frame_id = imu_data.header.frame_id;
